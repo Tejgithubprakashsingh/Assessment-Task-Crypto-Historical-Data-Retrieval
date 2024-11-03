@@ -1,0 +1,47 @@
+1. Data Structure
+The data is historical cryptocurrency price data for a chosen crypto pair (e.g., BTC/USD) from a specified start date to the current date. Each row represents a day and includes various calculated features used for both analysis and machine learning predictions.
+
+2. Columns in the Data
+The main columns in the dataset can be divided into three categories:
+
+a) Basic Price Data
+These columns provide the daily price values:
+
+Date: The specific day for each data entry.
+Open: The opening price of the cryptocurrency on that day.
+High: The highest price reached on that day.
+Low: The lowest price reached on that day.
+Close: The closing price of the cryptocurrency on that day.
+b) Rolling Metrics (Historical and Future)
+These metrics are calculated based on past variable1 days (e.g., 7 days) and future variable2 days (e.g., 5 days). They include:
+
+High_Last_{variable1}_Days: The highest price observed over the past variable1 days.
+Low_Last_{variable1}_Days: The lowest price observed over the past variable1 days.
+Days_Since_High_Last_{variable1}_Days: The number of days since the most recent high price in the last variable1 days.
+Days_Since_Low_Last_{variable1}_Days: The number of days since the most recent low price in the last variable1 days.
+%Diff_From_High_Last{variable1}_Days: The percentage difference between the current close price and the highest price over the past variable1 days.
+%Diff_From_Low_Last{variable1}_Days: The percentage difference between the current close price and the lowest price over the past variable1 days.
+c) Future Predictions
+These columns are calculated based on future prices over the next variable2 days and will be used as target variables in the model:
+
+High_Next_{variable2}_Days: The highest price expected in the next variable2 days.
+Low_Next_{variable2}_Days: The lowest price expected in the next variable2 days.
+%Diff_From_High_Next{variable2}_Days: The percentage difference between the current close price and the highest price over the next variable2 days.
+%Diff_From_Low_Next{variable2}_Days: The percentage difference between the current close price and the lowest price over the next variable2 days.
+3. Target Variables for Prediction
+The machine learning model is trained to predict the following two target variables:
+
+%Diff_From_High_Next{variable2}_Days: Predicted future percentage difference from the high price in the next variable2 days.
+%Diff_From_Low_Next{variable2}_Days: Predicted future percentage difference from the low price in the next variable2 days.
+4. Features for Model Training
+The model uses four main features to make predictions:
+
+Days_Since_High_Last_{variable1}_Days
+%Diff_From_High_Last{variable1}_Days
+Days_Since_Low_Last_{variable1}_Days
+%Diff_From_Low_Last{variable1}_Days
+5. Example Data Row
+For a hypothetical day, a row might look like this:
+
+Date	Open	High	Low	Close	High_Last_7_Days	Low_Last_7_Days	Days_Since_High_Last_7_Days	%_Diff_From_High_Last_7_Days	...
+2023-01-10	41000	42000	40000	41500	42500	39500	2	-2.35
